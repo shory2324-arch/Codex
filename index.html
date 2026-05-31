@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="손민형 제품 디자인 포트폴리오 CMS. 프로젝트, 프로필, 프레스, 로컬 분석 대시보드를 관리합니다."
+    />
+    <title>Son Minhyung Portfolio CMS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#app">본문으로 이동</a>
+
+    <header class="site-header" data-edit-visible="true">
+      <a class="brand" href="#/" aria-label="홈으로 이동">
+        <span class="brand-mark">SMH</span>
+        <span class="brand-copy">
+          <strong>Son Minhyung</strong>
+          <small>Product Design</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="주요 페이지">
+        <a href="#/" data-route-link="work">Work</a>
+        <a href="#/about" data-route-link="about">About</a>
+        <a href="#/press" data-route-link="press">Press</a>
+        <a href="#/analytics" data-route-link="analytics" class="edit-only-link">Analytics</a>
+      </nav>
+
+      <div class="mode-controls">
+        <span class="mode-pill" id="modeLabel">View Mode</span>
+        <button class="icon-button" id="editToggle" type="button" aria-pressed="false" title="Edit Mode 전환">
+          Edit
+        </button>
+      </div>
+    </header>
+
+    <main id="app" tabindex="-1"></main>
+
+    <aside class="edit-drawer" id="editDrawer" aria-label="포트폴리오 편집 패널" hidden>
+      <div class="drawer-header">
+        <div>
+          <p class="eyebrow">Local CMS</p>
+          <h2>Edit Mode</h2>
+        </div>
+        <button class="icon-button" id="closeDrawer" type="button" title="편집 패널 닫기">Close</button>
+      </div>
+
+      <div class="drawer-tabs" role="tablist" aria-label="편집 항목">
+        <button class="drawer-tab is-active" type="button" data-panel="content">Content</button>
+        <button class="drawer-tab" type="button" data-panel="style">Style</button>
+        <button class="drawer-tab" type="button" data-panel="profile">Profile</button>
+        <button class="drawer-tab" type="button" data-panel="data">Data</button>
+      </div>
+
+      <section class="drawer-panel is-active" id="panel-content" aria-label="프로젝트 편집">
+        <div class="panel-actions">
+          <button class="primary-button" id="addProjectButton" type="button">Add Project</button>
+          <button class="ghost-button" id="sortByClicksButton" type="button">Sort by Clicks</button>
+          <button class="ghost-button" id="openAnalyticsButton" type="button">Analytics</button>
+        </div>
+        <div class="project-admin-list" id="projectAdminList"></div>
+      </section>
+
+      <section class="drawer-panel" id="panel-style" aria-label="스타일 편집">
+        <div class="control-stack" id="styleControls"></div>
+      </section>
+
+      <section class="drawer-panel" id="panel-profile" aria-label="프로필 편집">
+        <form class="profile-form" id="profileForm"></form>
+      </section>
+
+      <section class="drawer-panel" id="panel-data" aria-label="데이터 관리">
+        <div class="panel-note">
+          <strong>Static CMS 구조</strong>
+          <p>브라우저 localStorage에 저장됩니다. 다른 기기나 배포본에 반영하려면 JSON을 export한 뒤 코드의 기본 데이터에 반영하세요.</p>
+        </div>
+        <div class="panel-actions vertical">
+          <button class="primary-button" id="exportButton" type="button">Export JSON</button>
+          <label class="file-button">
+            Import JSON
+            <input id="importInput" type="file" accept="application/json" />
+          </label>
+          <button class="ghost-button" id="resetButton" type="button">Reset Local Data</button>
+        </div>
+      </section>
+    </aside>
+
+    <div class="modal-layer" id="projectModal" hidden>
+      <div class="modal-backdrop" data-close-modal></div>
+      <section class="project-modal" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Project Editor</p>
+            <h2 id="projectModalTitle">Project</h2>
+          </div>
+          <button class="icon-button" type="button" data-close-modal>Close</button>
+        </div>
+        <form id="projectForm" class="project-form"></form>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
